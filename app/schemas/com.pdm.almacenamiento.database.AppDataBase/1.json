@@ -1,0 +1,78 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d8a3c291140b18da3c07fb2b130ebdcd",
+    "entities": [
+      {
+        "tableName": "clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCliente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreCliente` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idCliente",
+            "columnName": "idCliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreCliente",
+            "columnName": "nombreCliente",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idCliente"
+          ]
+        }
+      },
+      {
+        "tableName": "factura",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idFactura` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idCliente` INTEGER NOT NULL, `date` TEXT, FOREIGN KEY(`idCliente`) REFERENCES `clientes`(`idCliente`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idFactura",
+            "columnName": "idFactura",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCliente",
+            "columnName": "idCliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idFactura"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "clientes",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCliente"
+            ],
+            "referencedColumns": [
+              "idCliente"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd8a3c291140b18da3c07fb2b130ebdcd')"
+    ]
+  }
+}
