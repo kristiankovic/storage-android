@@ -9,8 +9,7 @@ import java.util.Locale;
 public class Converter {
 
     // conversor de string a fecha y viceversa
-    private static final SimpleDateFormat FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
     @TypeConverter
     public static String fromDate(Date date){
